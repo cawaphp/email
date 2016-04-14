@@ -1,0 +1,30 @@
+{
+    "name": "cawaphp/email",
+    "description": "Сáша Email",
+    "keywords": [
+        "cawa",
+        "email",
+        "smtp"
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "tchiotludo"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Cawa\\Email\\": "src"
+        }
+    },
+    "require": {
+        "php": "~7.0",
+        "cawaphp/cawa" : "dev-master",
+        "swiftmailer/swiftmailer": "^5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~5.3"
+    }
+}
