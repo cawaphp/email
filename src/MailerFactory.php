@@ -14,7 +14,7 @@ declare (strict_types = 1);
 namespace Cawa\Email;
 
 use Cawa\Core\DI;
-use Cawa\Uri\Uri;
+use Cawa\Net\Uri;
 
 trait MailerFactory
 {
@@ -70,6 +70,6 @@ trait MailerFactory
             $return = \Swift_Mailer::newInstance($transport);
         }
 
-        return DI::set(__METHOD__,  $name, $return);
+        return DI::set(__METHOD__, $name, $return);
     }
 }
