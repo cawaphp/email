@@ -19,11 +19,6 @@ use Cawa\Net\Uri;
 trait MailerFactory
 {
     /**
-     * @var array
-     */
-    private static $container = [];
-
-    /**
      * @param string $name
      *
      * @return \Swift_Mailer
