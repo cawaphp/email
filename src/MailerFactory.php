@@ -57,11 +57,15 @@ trait MailerFactory
                         $transport->setEncryption($uri->getQuery('encryption'));
                     }
                     break;
+                case 'echo':
+                    $transport = EchoTransport::newInstance();
+                    break;
 
                 default:
                     throw new \InvalidArgumentException(sprintf("Undefined email mailer type '%s'", $uri->getScheme()));
                     break;
             }
+
             $return = \Swift_Mailer::newInstance($transport);
         }
 
