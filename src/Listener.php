@@ -77,7 +77,7 @@ class Listener implements
      */
     public function sendPerformed(\Swift_Events_SendEvent $evt)
     {
-        self::dispatcher()->emit($this->sendEvent);
+        self::emit($this->sendEvent);
     }
 
     /**
@@ -146,7 +146,7 @@ class Listener implements
      */
     public function transportStarted(Swift_Events_TransportChangeEvent $evt)
     {
-        self::dispatcher()->emit($this->connectionEvent);
+        self::emit($this->connectionEvent);
         $this->connectionEvent = null;
     }
 
