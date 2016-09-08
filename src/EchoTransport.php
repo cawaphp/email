@@ -76,7 +76,7 @@ class EchoTransport implements Swift_Transport
         echo '<div class="cawaEmail">' . "\n";
         echo '<pre class="headers">' . $message->getHeaders()->toString() . '</pre>';
         /** @var Swift_MimePart $minePart */
-        foreach($message->getChildren() as $minePart) {
+        foreach ($message->getChildren() as $minePart) {
             echo '<div class="parts">' . "\n";
             echo '<pre class="mineHeaders">' . $minePart->getHeaders()->toString() . '</pre>';
             echo '<div class="content">' . "\n";
@@ -158,7 +158,7 @@ EOF;
         Swift_DependencyContainer::getInstance()
             ->register('transport.echo')
             ->asNewInstanceOf(self::class)
-            ->withDependencies(array('transport.eventdispatcher'));
+            ->withDependencies(['transport.eventdispatcher']);
 
         return new self();
     }
