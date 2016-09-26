@@ -112,7 +112,7 @@ class EchoTransport implements Swift_Transport
     /**
      * Create a new NullTransport instance.
      *
-     * @return $this
+     * @return $this|self
      */
     public static function newInstance()
     {

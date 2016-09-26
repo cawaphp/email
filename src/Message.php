@@ -67,7 +67,7 @@ class Message
     /**
      * @param string $html
      *
-     * @return $this
+     * @return $this|self
      */
     public function setHtmlBody(string $html) : self
     {
@@ -104,7 +104,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function attachSigner(\Swift_Signer $signer) : self
     {
@@ -114,7 +114,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function detachSigner(\Swift_Signer $signer) : self
     {
@@ -124,7 +124,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setBody($body, $contentType = null, $charset = null) : self
     {
@@ -144,7 +144,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setCharset($charset) : self
     {
@@ -164,7 +164,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setFormat($format) : self
     {
@@ -184,7 +184,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setDelSp($delsp = true) : self
     {
@@ -204,7 +204,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setSubject($subject) : self
     {
@@ -224,7 +224,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setDate($date) : self
     {
@@ -244,7 +244,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setReturnPath($address) : self
     {
@@ -264,7 +264,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setSender($address, $name = null) : self
     {
@@ -284,7 +284,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function addFrom($address, $name = null) : self
     {
@@ -296,7 +296,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setFrom($addresses, $name = null) : self
     {
@@ -316,7 +316,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function addReplyTo($address, $name = null) : self
     {
@@ -328,7 +328,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setReplyTo($addresses, $name = null) : self
     {
@@ -348,7 +348,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function addTo($address, $name = null) : self
     {
@@ -360,7 +360,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setTo($addresses, $name = null) : self
     {
@@ -380,7 +380,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function addCc($address, $name = null) : self
     {
@@ -390,7 +390,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setCc($addresses, $name = null) : self
     {
@@ -410,7 +410,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function addBcc($address, $name = null) : self
     {
@@ -422,7 +422,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setBcc($addresses, $name = null) : self
     {
@@ -442,7 +442,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setPriority($priority) : self
     {
@@ -462,7 +462,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setReadReceiptTo($addresses) : self
     {
@@ -482,7 +482,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function attach(\Swift_Mime_MimeEntity $entity) : self
     {
@@ -494,7 +494,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function detach(\Swift_Mime_MimeEntity $entity) : self
     {
@@ -538,7 +538,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setContentType($type) : self
     {
@@ -558,7 +558,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setId($id) : self
     {
@@ -578,7 +578,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setDescription($description) : self
     {
@@ -598,7 +598,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setMaxLineLength($length) : self
     {
@@ -626,7 +626,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setEncoder(\Swift_Mime_ContentEncoder $encoder) : self
     {
@@ -646,7 +646,7 @@ class Message
     /**
      * {@inheritdoc}
      *
-     * @return $this
+     * @return $this|self
      */
     public function setBoundary($boundary) : self
     {
