@@ -56,6 +56,7 @@ trait MailerFactory
                     if ($uri->getQuery('encryption')) {
                         $transport->setEncryption($uri->getQuery('encryption'));
                     }
+
                     break;
                 case 'echo':
                     $transport = EchoTransport::newInstance();
@@ -67,6 +68,11 @@ trait MailerFactory
             }
 
             $return = \Swift_Mailer::newInstance($transport);
+
+            if ($uri->getQuery('plugins')) {
+                foreach ($uri->getQuery('plugins') as $plugin)
+                $return->registerPlugin(new $plugin);
+            }
         }
 
         return DI::set(__METHOD__, $name, $return);
