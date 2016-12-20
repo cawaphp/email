@@ -62,6 +62,8 @@ class Message
                 return $child->getBody();
             }
         }
+
+        return null;
     }
 
     /**
@@ -108,7 +110,9 @@ class Message
      */
     public function attachSigner(\Swift_Signer $signer) : self
     {
-        return $this->message->attachSigner($signer);
+        $this->message->attachSigner($signer);
+
+        return $this;
     }
 
     /**
@@ -118,7 +122,9 @@ class Message
      */
     public function detachSigner(\Swift_Signer $signer) : self
     {
-        return $this->message->detachSigner($signer);
+        $this->message->detachSigner($signer);
+
+        return $this;
     }
 
     /**
@@ -384,7 +390,9 @@ class Message
      */
     public function addCc($address, $name = null) : self
     {
-        return $this->message->addCc($address, $name);
+        $this->message->addCc($address, $name);
+
+        return $this;
     }
 
     /**
