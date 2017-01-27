@@ -70,8 +70,9 @@ trait MailerFactory
             $return = \Swift_Mailer::newInstance($transport);
 
             if ($uri->getQuery('plugins')) {
-                foreach ($uri->getQuery('plugins') as $plugin)
-                $return->registerPlugin(new $plugin);
+                foreach ($uri->getQuery('plugins') as $plugin) {
+                    $return->registerPlugin(new $plugin);
+                }
             }
         }
 

@@ -31,6 +31,5 @@ class Disconnect implements Swift_Events_SendListener
      */
     public function beforeSendPerformed(Swift_Events_SendEvent $evt)
     {
-
     }
 }
