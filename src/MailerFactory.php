@@ -19,17 +19,18 @@ use Cawa\Net\Uri;
 trait MailerFactory
 {
     /**
-     * @param string $name
+     * @param string $name config key or class name
      *
      * @return \Swift_Mailer
      */
     private static function mailer(string $name = null) : \Swift_Mailer
     {
-        if ($return = DI::get(__METHOD__)) {
+        list($container, $config, $return) = DI::detect(__METHOD__, 'email', $name);
+
+        if ($return) {
             return $return;
         }
 
-        $config = DI::config()->getIfExists('email/' . ($name ?: 'default'));
         if (!$config) {
             $transport = \Swift_MailTransport::newInstance();
             $return = \Swift_Mailer::newInstance($transport);
@@ -76,6 +77,6 @@ trait MailerFactory
             }
         }
 
-        return DI::set(__METHOD__, $name, $return);
+        return DI::set(__METHOD__, $container, $return);
     }
 }
