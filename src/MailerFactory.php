@@ -58,6 +58,12 @@ trait MailerFactory
                         $transport->setEncryption($uri->getQuery('encryption'));
                     }
 
+                    if ($uri->getQuery('localDomain')) {
+                        $transport->setLocalDomain($uri->getQuery('localDomain'));
+                    } else {
+                        $transport->setLocalDomain('[127.0.0.1]');
+                    }
+
                     break;
                 case 'echo':
                     $transport = EchoTransport::newInstance();
