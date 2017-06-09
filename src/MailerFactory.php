@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace Cawa\Email;
 
@@ -78,7 +78,7 @@ trait MailerFactory
 
             if ($uri->getQuery('plugins')) {
                 foreach ($uri->getQuery('plugins') as $plugin) {
-                    $return->registerPlugin(new $plugin);
+                    $return->registerPlugin(new $plugin());
                 }
             }
         }

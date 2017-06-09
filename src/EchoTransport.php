@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace Cawa\Email;
 
@@ -80,7 +80,7 @@ class EchoTransport implements Swift_Transport
             echo '<div class="parts">' . "\n";
             echo '<pre class="mineHeaders">' . $minePart->getHeaders()->toString() . '</pre>';
             echo '<div class="content">' . "\n";
-            echo($minePart->getBody());
+            echo $minePart->getBody();
             echo '</div>' . "\n";
             echo '</div>' . "\n";
         }

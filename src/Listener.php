@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-declare (strict_types = 1);
+declare(strict_types = 1);
 
 namespace Cawa\Email;
 
@@ -20,12 +20,7 @@ use Swift_Events_ResponseEvent;
 use Swift_Events_TransportChangeEvent;
 use Swift_Events_TransportExceptionEvent;
 
-class Listener implements
-    \Swift_Events_CommandListener,
-    \Swift_Events_ResponseListener,
-    \Swift_Events_SendListener,
-    \Swift_Events_TransportChangeListener,
-    \Swift_Events_TransportExceptionListener
+class Listener implements \Swift_Events_CommandListener, \Swift_Events_ResponseListener, \Swift_Events_SendListener, \Swift_Events_TransportChangeListener, \Swift_Events_TransportExceptionListener
 {
     use DispatcherFactory;
     use LoggerFactory;
@@ -36,7 +31,6 @@ class Listener implements
     private $log = [];
 
     /**
-     * @return void
      */
     public function sendLog()
     {
@@ -113,7 +107,7 @@ class Listener implements
     public function beforeTransportStarted(Swift_Events_TransportChangeEvent $evt)
     {
         $data = [
-            'transport' =>  get_class($evt->getTransport())
+            'transport' => get_class($evt->getTransport()),
         ];
 
         if (method_exists($evt->getTransport(), 'getHost')) {
