@@ -492,7 +492,7 @@ class Message
      *
      * @return $this|self
      */
-    public function attach(\Swift_Mime_MimeEntity $entity) : self
+    public function attach(\Swift_Mime_SimpleMimeEntity $entity) : self
     {
         $this->message->attach($entity);
 
@@ -504,7 +504,7 @@ class Message
      *
      * @return $this|self
      */
-    public function detach(\Swift_Mime_MimeEntity $entity) : self
+    public function detach(\Swift_Mime_SimpleMimeEntity $entity) : self
     {
         $this->message->detach($entity);
 
@@ -514,7 +514,7 @@ class Message
     /**
      * {@inheritdoc}
      */
-    public function embed(\Swift_Mime_MimeEntity $entity)
+    public function embed(\Swift_Mime_SimpleMimeEntity $entity)
     {
         return $this->message->embed($entity);
     }

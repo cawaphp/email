@@ -17,7 +17,6 @@ use Swift_DependencyContainer;
 use Swift_Events_EventDispatcher;
 use Swift_Events_EventListener;
 use Swift_Events_SendEvent;
-use Swift_Mime_Message;
 use Swift_MimePart;
 use Swift_Transport;
 
@@ -26,15 +25,7 @@ class EchoTransport implements Swift_Transport
     /**
      * @var Swift_Events_EventDispatcher
      */
-    private $_eventDispatcher;
-
-    /**
-     *
-     */
-    public function __construct()
-    {
-        $this->_eventDispatcher = Swift_DependencyContainer::getInstance()->createDependenciesFor('transport.echo')[0];
-    }
+    private $eventDispatcher;
 
     /**
      * @return bool
@@ -59,15 +50,15 @@ class EchoTransport implements Swift_Transport
     }
 
     /**
-     * @param Swift_Mime_Message $message
+     * @param \Swift_Mime_SimpleMessage $message
      * @param string[] $failedRecipients An array of failures by-reference
      *
      * @return int The number of sent emails
      */
-    public function send(Swift_Mime_Message $message, &$failedRecipients = null)
+    public function send(\Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
     {
-        if ($evt = $this->_eventDispatcher->createSendEvent($this, $message)) {
-            $this->_eventDispatcher->dispatchEvent($evt, 'beforeSendPerformed');
+        if ($evt = $this->eventDispatcher->createSendEvent($this, $message)) {
+            $this->eventDispatcher->dispatchEvent($evt, 'beforeSendPerformed');
             if ($evt->bubbleCancelled()) {
                 return 0;
             }
@@ -87,7 +78,7 @@ class EchoTransport implements Swift_Transport
         echo '</div>' . "\n";
         if ($evt) {
             $evt->setResult(Swift_Events_SendEvent::RESULT_SUCCESS);
-            $this->_eventDispatcher->dispatchEvent($evt, 'sendPerformed');
+            $this->eventDispatcher->dispatchEvent($evt, 'sendPerformed');
         }
 
         $count = (
@@ -106,15 +97,13 @@ class EchoTransport implements Swift_Transport
      */
     public function registerPlugin(Swift_Events_EventListener $plugin)
     {
-        $this->_eventDispatcher->bindEventListener($plugin);
+        $this->eventDispatcher->bindEventListener($plugin);
     }
 
     /**
-     * Create a new NullTransport instance.
      *
-     * @return $this|self
      */
-    public static function newInstance()
+    public function __construct()
     {
         echo <<<EOF
         <style type="text/css">
@@ -160,6 +149,15 @@ EOF;
             ->asNewInstanceOf(self::class)
             ->withDependencies(['transport.eventdispatcher']);
 
-        return new self();
+        $this->eventDispatcher = Swift_DependencyContainer::getInstance()
+            ->createDependenciesFor('transport.null')[0];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function ping()
+    {
+        return true;
     }
 }

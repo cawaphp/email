@@ -25,22 +25,19 @@ trait MailerFactory
      */
     private static function mailer(string $name = null) : \Swift_Mailer
     {
-        list($container, $config, $return) = DI::detect(__METHOD__, 'email', $name);
+        list($container, $config, $return) = DI::detect(__METHOD__, 'email', $name, true);
 
         if ($return) {
             return $return;
         }
 
-        if (!$config) {
-            $transport = \Swift_MailTransport::newInstance();
-            $return = \Swift_Mailer::newInstance($transport);
-        } elseif (is_callable($config)) {
+        if (is_callable($config)) {
             $return = $config();
         } else {
             $uri = new Uri($config);
             switch ($uri->getScheme()) {
                 case 'smtp':
-                    $transport = \Swift_SmtpTransport::newInstance($uri->getHost(), $uri->getPort());
+                    $transport = new  \Swift_SmtpTransport($uri->getHost(), $uri->getPort());
 
                     if ($uri->getUser()) {
                         $transport->setUsername($uri->getUser());
@@ -66,7 +63,7 @@ trait MailerFactory
 
                     break;
                 case 'echo':
-                    $transport = EchoTransport::newInstance();
+                    $transport = new EchoTransport();
                     break;
 
                 default:
@@ -74,7 +71,7 @@ trait MailerFactory
                     break;
             }
 
-            $return = \Swift_Mailer::newInstance($transport);
+            $return = new \Swift_Mailer($transport);
 
             if ($uri->getQuery('plugins')) {
                 foreach ($uri->getQuery('plugins') as $plugin) {

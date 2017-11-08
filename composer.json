@@ -20,11 +20,11 @@
         }
     },
     "require": {
-        "php": "~7.0",
+        "php": "~7.1",
         "cawaphp/cawa" : "dev-master",
-        "swiftmailer/swiftmailer": "~5.4"
+        "swiftmailer/swiftmailer": "~6.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "~5.5"
+        "phpunit/phpunit": "~6.4"
     }
 }
