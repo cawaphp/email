@@ -16,6 +16,8 @@ namespace Cawa\Email\Commands;
 use Cawa\Console\Command;
 use Cawa\Console\ConsoleOutput;
 use Cawa\Core\DI;
+use Cawa\Serializer\Json;
+use Swift_Attachment;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -37,6 +39,7 @@ class Message extends Command
             ->addOption('cc', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'CC email')
             ->addOption('bcc', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'BCC email')
             ->addOption('headers', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Headers')
+            ->addOption('attachments', null, InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Attachments in json {"name": "", "contentType":"", "content":""}')
             ->addArgument('email', InputArgument::IS_ARRAY | InputArgument::REQUIRED, 'Destination email')
         ;
     }
@@ -76,6 +79,21 @@ class Message extends Command
         if ($input->getOption('headers')) {
             foreach ($input->getOption('headers') as $key => $value) {
                 $message->getHeaders()->addTextHeader($key, $value);
+            }
+        }
+
+        if ($input->getOption('attachments')) {
+            foreach ($input->getOption('attachments') as $value) {
+                $value = Json::decode($value);
+
+                $attachment = (new Swift_Attachment())
+                    ->setFilename($value['name'])
+                    ->setBody(base64_decode($value['content']));
+
+                if ($value['contentType']) {
+                    $attachment->setContentType($value['contentType']);
+                }
+                $message->attach($attachment);
             }
         }
 
